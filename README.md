@@ -4,7 +4,7 @@ This day has come — you are deploying Grafana! Of course, to deploy Grafana yo
 
 ## Prerequisites
 
-Before completing any task in the module, make sure that you followed all the steps described in the **Environment Setup** topic, in particular:
+Before completing any task in the module, make sure that you followed all the steps described in the **Environment Setup** topic, in particular: 
 
 1. Make sure you have an [AWS](https://aws.amazon.com/free/) account.
 
