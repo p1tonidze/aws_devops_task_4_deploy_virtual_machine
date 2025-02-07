@@ -26,27 +26,27 @@ In this task, you will deploy an EC2 instance and install [Grafana](https://graf
 
 To complete this task:
 
-1. Edit `terraform.tfvars` — fill out the tfvars file with the outputs from the previous modules and your own configuration variables. You should use those variables as parameters for the resources in this task. This task requires only two variables — `subnet_id` and `security_group_id`, which you can get as Terraform module outputs in the [previous task](https://github.com/mate-academy/aws_devops_task_3_configure_network).
+1. Edit `terraform.tfvars` — fill out the `tfvars` file with the outputs from the previous modules and your own configuration variables. You should use those variables as parameters for the resources in this task. This task requires only two variables — `subnet_id` and `security_group_id`, which you can get as Terraform module outputs in the [previous task](https://github.com/mate-academy/aws_devops_task_3_configure_network).
 
 2. Edit `main.tf` — add resources required for this task:
 
-    - Uncomment the [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) resource and its configuration, and use it to get the AMI ID for your EC2 instance deployment.
+    - Uncomment the [`aws_ami`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) resource and its configuration, and use it to get the AMI ID for your EC2 instance deployment.
 
-    - Use the resource [aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) to create an SSH key pair resource for your EC2 instance.
+    - Use the resource [`aws_key_pair`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) to create an SSH key pair resource for your EC2 instance.
         - For the resource, you have to provide an RSA SSH public key (if you don't have one — [generate it](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)).
         - If you want to get a bonus — use the [file](https://developer.hashicorp.com/terraform/language/functions/file) function to load the public key file content from your `.ssh` folder instead of hardcoding it in Terraform.
 
-    - Use the resource [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) to deploy an EC2 instance and install Grafana on it!
+    - Use the resource [`aws_instance`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) to deploy an EC2 instance and install Grafana on it!
         - Use the data source you uncommented to get the AMI ID.
-        - Use the 't2.micro' instance type.
+        - Use the `t2.micro` instance type.
         - Enable association of a public IP address.
         - Deploy the VM to the subnet you deployed in the previous task.
         - Use the security group you created in the previous task (for that, use the parameter `vpc_security_group_ids`).
         - Use the key pair you are deploying in this module.
-        - Create a `Name` tag with the value `mate-aws-grafana-lab`.
-        - Install Grafana on the VM using cloud-init (the parameter is called `user_data`). You can find a bash script for installing Grafana in the file `install-grafana.sh` in this repo. Use either the [file](https://developer.hashicorp.com/terraform/language/functions/file) function or a [multiline string](https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings) to load the script content to the Terraform resource parameter.
+        - Create a `Name` tag with the `mate-aws-grafana-lab` value.
+        - Install Grafana on the VM using `cloud-init` (the parameter is called `user_data`). You can find a bash script for installing Grafana in the `install-grafana.sh` file in this repo. Use either the [file](https://developer.hashicorp.com/terraform/language/functions/file) function or a [multiline string](https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings) to load the script content to the Terraform resource parameter.
 
-3. After adding the code to `main.tf`, review the file `outputs.tf` and make sure that all output variables are valid and can output relevant values, as described in the output variable descriptions.
+3. After adding the code to `main.tf`, review the `outputs.tf` file and make sure that all output variables are valid and can output relevant values, as described in the output variable descriptions.
 
 4. Run the following commands to generate a Terraform execution plan in **JSON** format:
 
@@ -74,4 +74,4 @@ To complete this task:
 
 7. Wait for 5 minutes after the deployment, and try to open the Grafana URL from the Terraform module output. When logging in for the first time, you will be prompted to change the admin password. Save the new password somewhere — you will need it for the next task.
 
-8. Commit the file `tfplan.json` and submit your solution for review.
+8. Commit the `tfplan.json` file and submit your solution for review.
